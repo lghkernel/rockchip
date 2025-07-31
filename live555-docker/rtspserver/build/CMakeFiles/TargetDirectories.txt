@@ -1,0 +1,7 @@
+/root/rtspserver/build/CMakeFiles/rtspshm.dir
+/root/rtspserver/build/CMakeFiles/edit_cache.dir
+/root/rtspserver/build/CMakeFiles/rebuild_cache.dir
+/root/rtspserver/build/CMakeFiles/list_install_components.dir
+/root/rtspserver/build/CMakeFiles/install.dir
+/root/rtspserver/build/CMakeFiles/install/local.dir
+/root/rtspserver/build/CMakeFiles/install/strip.dir
