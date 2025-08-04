@@ -10,13 +10,11 @@ include_directories(include)
 
 # Tạo thư viện shm (object lib để dùng cả C & C++)
 add_library(shm STATIC
-    src/shared_mem.c
-    src/nalu_writer.c
-    src/nalu_reader.cpp
+    src/shared_mem.cpp
 )
 
 # Writer executable
-add_executable(writer test/writer_main.c)
+add_executable(writer test/writer_main.cpp)
 target_link_libraries(writer shm pthread)
 
 # Reader executable
