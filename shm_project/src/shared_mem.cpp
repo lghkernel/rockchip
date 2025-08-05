@@ -87,7 +87,7 @@ bool read_nalu_from_shm(SharedMemory* shm, uint8_t* out_buf, size_t* out_size) {
 
 static bool is_start_code(const uint8_t* buf) {
     return (buf[0] == 0x00 && buf[1] == 0x00 &&
-           ((buf[2] == 0x01) || (buf[2] == 0x00 && buf[3] == 0x01)));
+            buf[2] == 0x00 && buf[3] == 0x01);
 }
 
 bool extract_next_nalu(FILE* fp, uint8_t* out_buf, size_t* out_len) {
@@ -109,6 +109,10 @@ bool extract_next_nalu(FILE* fp, uint8_t* out_buf, size_t* out_len) {
             } else {
                 start_found = true;
                 len = 0;
+                buffer[len++] = 0x00;
+                buffer[len++] = 0x00;
+                buffer[len++] = 0x00;
+                buffer[len++] = 0x01;
             }
         }
     }
