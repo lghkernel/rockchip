@@ -28,9 +28,9 @@ if(Live555_FOUND)
         /usr/local/include/BasicUsageEnvironment
     )
     set(LIVE555_LIBRARIES
-        ${LIVEMEDIA_LIBRARY}
-        ${GROUPSOCK_LIBRARY}
         ${USAGEENV_LIBRARY}
         ${BASICUSAGEENV_LIBRARY}
+        ${GROUPSOCK_LIBRARY}
+        ${LIVEMEDIA_LIBRARY}
     )
 endif()

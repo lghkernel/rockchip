@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/rtsp_test.dir/main.cpp.o -o rtsp_test  /usr/local/lib/libUsageEnvironment.a /usr/local/lib/libBasicUsageEnvironment.a /usr/local/lib/libgroupsock.a /usr/local/lib/libliveMedia.a /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so -lpthread 

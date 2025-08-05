@@ -1,2 +1,0 @@
-/usr/bin/ar qc librtspshm.a CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o
-/usr/bin/ranlib librtspshm.a

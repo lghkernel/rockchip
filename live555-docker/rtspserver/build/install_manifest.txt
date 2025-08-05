@@ -1,7 +1,0 @@
-/usr/local/lib/librtspshm.a
-/usr/local/include/rtspshm/SharedMemoryFramedSource.hh
-/usr/local/include/rtspshm/shared_mem.hh
-/usr/local/lib/cmake/rtspshm/rtspshmTargets.cmake
-/usr/local/lib/cmake/rtspshm/rtspshmTargets-noconfig.cmake
-/usr/local/lib/cmake/rtspshm/rtspshmConfig.cmake
-/usr/local/lib/cmake/rtspshm/rtspshmConfigVersion.cmake

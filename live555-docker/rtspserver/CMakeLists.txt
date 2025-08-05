@@ -20,11 +20,12 @@ target_include_directories(rtspshm
     PUBLIC
         $<BUILD_INTERFACE:${RTSP_INCLUDE_DIR}>
         $<INSTALL_INTERFACE:include/rtspshm>
+    PRIVATE
         ${LIVE555_INCLUDE_DIRS}
 )
 
 target_link_libraries(rtspshm
-    PUBLIC
+    PRIVATE
         ${LIVE555_LIBRARIES}
         pthread
 )
@@ -76,3 +77,4 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/${RTSPSHM_PROJECT_NAME}ConfigVersion.cmake
     DESTINATION lib/cmake/${RTSPSHM_PROJECT_NAME}
 )
+add_subdirectory(test)
