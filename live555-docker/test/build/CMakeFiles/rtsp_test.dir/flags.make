@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/local/include/rtspshm -isystem /usr/local/include/liveMedia -isystem /usr/local/include/groupsock -isystem /usr/local/include/UsageEnvironment -isystem /usr/local/include/BasicUsageEnvironment
+CXX_INCLUDES = -I/usr/local/include/liveMedia -I/usr/local/include/groupsock -I/usr/local/include/UsageEnvironment -I/usr/local/include/BasicUsageEnvironment
 
-CXX_FLAGS = -fPIC
+CXX_FLAGS = 
 

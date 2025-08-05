@@ -1,96 +1,39 @@
-// #include <liveMedia.hh>
-// #include <BasicUsageEnvironment.hh>
-// #include "SharedMemoryFramedSource.hh"
-// #include <thread>
-// #include <chrono>
+#include <liveMedia.hh>
+#include <BasicUsageEnvironment.hh>
+#include "SharedMemoryMediaSubsession.hh"
 
-// // Subclass để gắn source vào RTSP Server
-// class SharedMemoryH264Subsession : public OnDemandServerMediaSubsession {
-// public:
-//     static SharedMemoryH264Subsession* createNew(UsageEnvironment& env) {
-//         return new SharedMemoryH264Subsession(env);
-//     }
+int main(int argc, char** argv) {
+  // 1. Tạo Task Scheduler và Environment
+  TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+  UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
 
-// protected:
-//     SharedMemoryH264Subsession(UsageEnvironment& env)
-//         : OnDemandServerMediaSubsession(env, True /*reuse*/) {}
+  // 2. Tạo RTSP Server trên cổng 8554
+  RTSPServer* rtspServer = RTSPServer::createNew(*env, 8554);
+  if (rtspServer == nullptr) {
+    *env << "❌ Lỗi: Không thể tạo RTSP server: " << env->getResultMsg() << "\n";
+    exit(1);
+  }
 
-//     virtual FramedSource* createNewStreamSource(unsigned /*clientSessionId*/, unsigned& estBitrate) override {
-//         estBitrate = 500; // kbps, giả lập
-//         return SharedMemoryFramedSource::createNew(envir());
-//     }
+  // 3. Tạo MediaSession với subsession lấy từ SharedMemory
+  char const* streamName = "stream";
+  char const* description = "Streaming H264 từ Shared Memory";
 
-//     virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock,
-//                                       unsigned char rtpPayloadTypeIfDynamic,
-//                                       FramedSource* inputSource) override {
-//         return H264VideoRTPSink::createNew(envir(), rtpGroupsock, rtpPayloadTypeIfDynamic);
-//     }
-// };
+  ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, streamName, description);
+  sms->addSubsession(SharedMemoryMediaSubsession::createNew(*env));
+  rtspServer->addServerMediaSession(sms);
 
-// int main(int argc, char** argv) {
-//     // Bước 1: Init môi trường
-//     TaskScheduler* scheduler = BasicTaskScheduler::createNew();
-//     UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+  // 4. Log URL để người dùng kết nối
+  char* url = rtspServer->rtspURL(sms);
+  *env << "✅ RTSP Stream ready tại: " << url << "\n";
+  delete[] url;
 
-//     // Bước 2: Tạo RTSP Server
-//     RTSPServer* rtspServer = RTSPServer::createNew(*env, 8554);
-//     if (!rtspServer) {
-//         *env << "❌ Lỗi tạo RTSP Server: " << env->getResultMsg() << "\n";
-//         exit(1);
-//     }
+  // 5. Vòng lặp xử lý sự kiện RTSP
+  env->taskScheduler().doEventLoop(); // chạy mãi mãi
 
-//     // Bước 3: Tạo media session /stream
-//     ServerMediaSession* sms = ServerMediaSession::createNew(*env, "stream", "SharedMemStream",
-//         "Stream truyền từ SharedMemory", True /*SSM*/);
-//     sms->addSubsession(SharedMemoryH264Subsession::createNew(*env));
-//     rtspServer->addServerMediaSession(sms);
+  // Không đến đây, nhưng nếu muốn dọn dẹp:
+  // Medium::close(rtspServer);
+  // delete env;
+  // delete scheduler;
 
-//     char* url = rtspServer->rtspURL(sms);
-//     *env << "✅ RTSP stream đang chạy tại: " << url << "\n";
-//     delete[] url;
-
-//     // Bước 4: Giả lập producer đẩy frame vào shm (test)
-//     auto* shmSource = SharedMemoryFramedSource::createNew(*env);
-
-//     std::thread fakeProducer([env, shmSource]() {
-//         while (true) {
-//             // NAL unit giả lập (IDR frame: 0x65)
-//             std::vector<u_int8_t> fakeNAL = {0x00, 0x00, 0x00, 0x01, 0x65, 0x88, 0x84, 0x21, 0x43};
-//             {
-//                 std::lock_guard<std::mutex> lock(shmSource->fMutex);
-//                 shmSource->fFrameQueue.push(fakeNAL);
-//             }
-//             env->taskScheduler().triggerEvent(shmSource->fEventTriggerId, shmSource);
-//             std::this_thread::sleep_for(std::chrono::milliseconds(40)); // ~25fps
-//         }
-//     });
-//     fakeProducer.detach();
-
-//     // Bước 5: Vòng lặp RTSP
-//     env->taskScheduler().doEventLoop();
-
-//     return 0;
-// }
-#include <rtspshm/RTSPFileStreamer.hh>
-#include <chrono>
-#include <thread>
-#include <iostream>
-
-int main() {
-    std::cout << "Starting RTSP file streamer...\n";
-
-    // Stream từ file .h264 đã có sẵn
-    rtsp::RTSPFileStreamer streamer("stream264", "/root/videos/sample.h264", rtsp::VideoCodec::H264, 8554);
-    
-    if (!streamer.start()) {
-        std::cerr << "Failed to start RTSP streamer.\n";
-        return 1;
-    }
-
-    std::cout << "Streaming ready on rtsp://<your-ip>:8554/stream264\n";
-    std::cout << "Press Ctrl+C to stop...\n";
-
-    // Giữ chương trình sống
-    std::this_thread::sleep_for(std::chrono::hours(1));
-    return 0;
+  return 0;
 }
