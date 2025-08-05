@@ -1,56 +1,59 @@
 #include "SharedMemoryFramedSource.hh"
-#include <GroupsockHelper.hh> // for gettimeofday
 #include <cstring>
+#include <unistd.h>
 
 SharedMemoryFramedSource* SharedMemoryFramedSource::createNew(UsageEnvironment& env) {
-    return new SharedMemoryFramedSource(env);
+  return new SharedMemoryFramedSource(env);
 }
 
 SharedMemoryFramedSource::SharedMemoryFramedSource(UsageEnvironment& env)
-    : FramedSource(env) {
-    fEventTriggerId = envir().taskScheduler().createEventTrigger(onTrigger);
+  : FramedSource(env), shm_(nullptr) {
+  shm_ = shm_create_or_open(/*create=*/false);
+  if (!shm_) {
+    env << "Failed to open shared memory.\n";
+  }
 }
 
 SharedMemoryFramedSource::~SharedMemoryFramedSource() {
-    envir().taskScheduler().deleteEventTrigger(fEventTriggerId);
+  shm_cleanup(false);
+}
+
+void SharedMemoryFramedSource::doStopGettingFrames() {
+  // no-op
 }
 
 void SharedMemoryFramedSource::doGetNextFrame() {
-    std::lock_guard<std::mutex> lock(fMutex);
+  if (!shm_) {
+    handleClosure();
+    return;
+  }
 
-    if (!fFrameQueue.empty()) {
-        deliverFrame();
-    } else {
-        // Không có frame → chờ trigger
-    }
-}
+  size_t naluSize = 0;
+  static uint8_t buffer[MAX_NALU_SIZE];
 
-// Hàm được gọi bởi triggerEvent()
-void SharedMemoryFramedSource::onTrigger(void* clientData) {
-    ((SharedMemoryFramedSource*)clientData)->deliverFrame();
-}
+  if (!read_nalu_from_shm(shm_, buffer, &naluSize)) {
+    envir().taskScheduler().scheduleDelayedTask(1000, (TaskFunc*)FramedSource::afterGetting, this);
+    return;
+  }
 
-void SharedMemoryFramedSource::deliverFrame() {
-    std::lock_guard<std::mutex> lock(fMutex);
+  // Remove 00 00 00 01 start code (assumed 4 bytes)
+  const unsigned startCodeSize = 4;
+  if (naluSize <= startCodeSize) {
+    handleClosure();
+    return;
+  }
 
-    if (fFrameQueue.empty() || fNumTruncatedBytes != 0 || fTo == nullptr) return;
+  unsigned payloadSize = naluSize - startCodeSize;
+  if (payloadSize > fMaxSize) {
+    fFrameSize = fMaxSize;
+    fNumTruncatedBytes = payloadSize - fMaxSize;
+  } else {
+    fFrameSize = payloadSize;
+    fNumTruncatedBytes = 0;
+  }
 
-    std::vector<u_int8_t> frame = std::move(fFrameQueue.front());
-    fFrameQueue.pop();
+  gettimeofday(&fPresentationTime, nullptr);
+  std::memcpy(fTo, buffer + startCodeSize, fFrameSize);
 
-    // Copy dữ liệu vào buffer mà live555 cấp phát
-    unsigned int frameSize = frame.size();
-    if (frameSize > fMaxSize) {
-        fNumTruncatedBytes = frameSize - fMaxSize;
-        frameSize = fMaxSize;
-    } else {
-        fNumTruncatedBytes = 0;
-    }
-
-    std::memcpy(fTo, frame.data(), frameSize);
-    fFrameSize = frameSize;
-    gettimeofday(&fPresentationTime, nullptr);
-
-    // Báo live555 là đã xong 1 frame
-    FramedSource::afterGetting(this);
+  FramedSource::afterGetting(this);
 }

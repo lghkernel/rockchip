@@ -1,28 +1,21 @@
-#pragma once
+#ifndef SHARED_MEMORY_FRAMED_SOURCE_HH
+#define SHARED_MEMORY_FRAMED_SOURCE_HH
 
 #include <FramedSource.hh>
-#include <mutex>
-#include <queue>
+#include "shared_mem.hh"
 
 class SharedMemoryFramedSource : public FramedSource {
 public:
-    static SharedMemoryFramedSource* createNew(UsageEnvironment& env);
+  static SharedMemoryFramedSource* createNew(UsageEnvironment& env);
 
 protected:
-    SharedMemoryFramedSource(UsageEnvironment& env);
-    virtual ~SharedMemoryFramedSource();
+  SharedMemoryFramedSource(UsageEnvironment& env);
+  virtual ~SharedMemoryFramedSource();
 
 private:
-    virtual void doGetNextFrame() override;
+  virtual void doGetNextFrame();
+  virtual void doStopGettingFrames();
 
-    // Gọi khi trigger báo có frame mới
-    static void onTrigger(void* clientData);
-    void deliverFrame();
-
-private:
-    EventTriggerId fEventTriggerId;
-    std::mutex fMutex;
-
-    // Giả lập buffer nhận từ shared memory
-    std::queue<std::vector<u_int8_t>> fFrameQueue;
+  SharedMemory* shm_;
 };
+#endif

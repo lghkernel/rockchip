@@ -69,24 +69,10 @@ include CMakeFiles/rtspshm.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/rtspshm.dir/flags.make
 
-CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o: CMakeFiles/rtspshm.dir/flags.make
-CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o: ../src/RTSPFileStreamer.cpp
-CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o: CMakeFiles/rtspshm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o -MF CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o.d -o CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o -c /root/rtspserver/src/RTSPFileStreamer.cpp
-
-CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/rtspserver/src/RTSPFileStreamer.cpp > CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.i
-
-CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/rtspserver/src/RTSPFileStreamer.cpp -o CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.s
-
 CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o: CMakeFiles/rtspshm.dir/flags.make
 CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o: ../src/SharedMemoryFramedSource.cpp
 CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o: CMakeFiles/rtspshm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o -MF CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o.d -o CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o -c /root/rtspserver/src/SharedMemoryFramedSource.cpp
 
 CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.i: cmake_force
@@ -97,27 +83,38 @@ CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/rtspserver/src/SharedMemoryFramedSource.cpp -o CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.s
 
+CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o: CMakeFiles/rtspshm.dir/flags.make
+CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o: ../src/shared_mem.cpp
+CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o: CMakeFiles/rtspshm.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o -MF CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o.d -o CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o -c /root/rtspserver/src/shared_mem.cpp
+
+CMakeFiles/rtspshm.dir/src/shared_mem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtspshm.dir/src/shared_mem.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/rtspserver/src/shared_mem.cpp > CMakeFiles/rtspshm.dir/src/shared_mem.cpp.i
+
+CMakeFiles/rtspshm.dir/src/shared_mem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtspshm.dir/src/shared_mem.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/rtspserver/src/shared_mem.cpp -o CMakeFiles/rtspshm.dir/src/shared_mem.cpp.s
+
 # Object files for target rtspshm
 rtspshm_OBJECTS = \
-"CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o" \
-"CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o"
+"CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o" \
+"CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o"
 
 # External object files for target rtspshm
 rtspshm_EXTERNAL_OBJECTS =
 
-librtspshm.so: CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o
-librtspshm.so: CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o
-librtspshm.so: CMakeFiles/rtspshm.dir/build.make
-librtspshm.so: /usr/local/lib/libliveMedia.a
-librtspshm.so: /usr/local/lib/libgroupsock.a
-librtspshm.so: /usr/local/lib/libUsageEnvironment.a
-librtspshm.so: /usr/local/lib/libBasicUsageEnvironment.a
-librtspshm.so: CMakeFiles/rtspshm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library librtspshm.so"
+librtspshm.a: CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o
+librtspshm.a: CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o
+librtspshm.a: CMakeFiles/rtspshm.dir/build.make
+librtspshm.a: CMakeFiles/rtspshm.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/rtspserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library librtspshm.a"
+	$(CMAKE_COMMAND) -P CMakeFiles/rtspshm.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rtspshm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/rtspshm.dir/build: librtspshm.so
+CMakeFiles/rtspshm.dir/build: librtspshm.a
 .PHONY : CMakeFiles/rtspshm.dir/build
 
 CMakeFiles/rtspshm.dir/clean:

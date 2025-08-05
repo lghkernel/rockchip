@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 14)
 
 project(rtspshm LANGUAGES CXX)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src RTSPSHM_SOURCES)
 
@@ -11,7 +12,7 @@ find_package(Live555 REQUIRED)
 set(RTSP_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(RTSP_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_library(rtspshm SHARED
+add_library(rtspshm STATIC
     ${RTSPSHM_SOURCES}
 )
 

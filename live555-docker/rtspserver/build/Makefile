@@ -174,30 +174,6 @@ rtspshm/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/build
 .PHONY : rtspshm/fast
 
-src/RTSPFileStreamer.o: src/RTSPFileStreamer.cpp.o
-.PHONY : src/RTSPFileStreamer.o
-
-# target to build an object file
-src/RTSPFileStreamer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o
-.PHONY : src/RTSPFileStreamer.cpp.o
-
-src/RTSPFileStreamer.i: src/RTSPFileStreamer.cpp.i
-.PHONY : src/RTSPFileStreamer.i
-
-# target to preprocess a source file
-src/RTSPFileStreamer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.i
-.PHONY : src/RTSPFileStreamer.cpp.i
-
-src/RTSPFileStreamer.s: src/RTSPFileStreamer.cpp.s
-.PHONY : src/RTSPFileStreamer.s
-
-# target to generate assembly for a file
-src/RTSPFileStreamer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.s
-.PHONY : src/RTSPFileStreamer.cpp.s
-
 src/SharedMemoryFramedSource.o: src/SharedMemoryFramedSource.cpp.o
 .PHONY : src/SharedMemoryFramedSource.o
 
@@ -222,6 +198,30 @@ src/SharedMemoryFramedSource.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.s
 .PHONY : src/SharedMemoryFramedSource.cpp.s
 
+src/shared_mem.o: src/shared_mem.cpp.o
+.PHONY : src/shared_mem.o
+
+# target to build an object file
+src/shared_mem.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o
+.PHONY : src/shared_mem.cpp.o
+
+src/shared_mem.i: src/shared_mem.cpp.i
+.PHONY : src/shared_mem.i
+
+# target to preprocess a source file
+src/shared_mem.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/shared_mem.cpp.i
+.PHONY : src/shared_mem.cpp.i
+
+src/shared_mem.s: src/shared_mem.cpp.s
+.PHONY : src/shared_mem.s
+
+# target to generate assembly for a file
+src/shared_mem.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtspshm.dir/build.make CMakeFiles/rtspshm.dir/src/shared_mem.cpp.s
+.PHONY : src/shared_mem.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -235,12 +235,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... rtspshm"
-	@echo "... src/RTSPFileStreamer.o"
-	@echo "... src/RTSPFileStreamer.i"
-	@echo "... src/RTSPFileStreamer.s"
 	@echo "... src/SharedMemoryFramedSource.o"
 	@echo "... src/SharedMemoryFramedSource.i"
 	@echo "... src/SharedMemoryFramedSource.s"
+	@echo "... src/shared_mem.o"
+	@echo "... src/shared_mem.i"
+	@echo "... src/shared_mem.s"
 .PHONY : help
 
 

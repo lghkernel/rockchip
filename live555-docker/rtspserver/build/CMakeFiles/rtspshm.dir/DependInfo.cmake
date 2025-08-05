@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/root/rtspserver/src/RTSPFileStreamer.cpp" "CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o" "gcc" "CMakeFiles/rtspshm.dir/src/RTSPFileStreamer.cpp.o.d"
   "/root/rtspserver/src/SharedMemoryFramedSource.cpp" "CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o" "gcc" "CMakeFiles/rtspshm.dir/src/SharedMemoryFramedSource.cpp.o.d"
+  "/root/rtspserver/src/shared_mem.cpp" "CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o" "gcc" "CMakeFiles/rtspshm.dir/src/shared_mem.cpp.o.d"
   )
 
 # Targets to which this target links.

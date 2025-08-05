@@ -51,7 +51,7 @@ if(_IMPORT_PREFIX STREQUAL "/")
 endif()
 
 # Create imported target rtspshm::rtspshm
-add_library(rtspshm::rtspshm SHARED IMPORTED)
+add_library(rtspshm::rtspshm STATIC IMPORTED)
 
 set_target_properties(rtspshm::rtspshm PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/rtspshm;/usr/local/include/liveMedia;/usr/local/include/groupsock;/usr/local/include/UsageEnvironment;/usr/local/include/BasicUsageEnvironment"
